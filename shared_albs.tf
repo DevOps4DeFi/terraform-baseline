@@ -4,7 +4,7 @@ resource "aws_lb" "public_alb" {
   subnets            = module.vpc.public_subnets
   security_groups    = [aws_security_group.public_alb_sg.id]
   internal           = false
-  tags = merge(var.tags{Name = "DevOps4DeFi-public-alb"})
+  tags = merge(var.tags, {Name = "DevOps4DeFi-public-alb"})
 }
 
 resource "aws_lb" "private_alb" {
@@ -13,7 +13,7 @@ resource "aws_lb" "private_alb" {
   subnets            = module.vpc.private_subnets
   security_groups    = [aws_security_group.private_alb_sg.id]
   internal           = true
-  tags = merge(var.tags{Name = "DevOps4DeFi-private-alb"})
+  tags = merge(var.tags, {Name = "DevOps4DeFi-private-alb"})
 }
 
 resource "aws_lb_listener" "public_https" {
@@ -46,7 +46,7 @@ resource "aws_lb_listener" "private_http" {
 resource "aws_security_group" "public_alb_sg" {
   name_prefix = "DevOps4DeFi_public_alb"
   vpc_id      = module.vpc.vpc_id
-  tags = merge(var.tags{Name = "DevOps4DeFi-public-alb"})
+  tags = merge(var.tags,{Name = "DevOps4DeFi-public-alb"})
   ingress {
     from_port   = 0
     protocol    = "TCP"
@@ -67,7 +67,7 @@ resource "aws_security_group" "public_alb_sg" {
 resource "aws_security_group" "private_alb_sg" {
   name_prefix = "DevOps4DeFi_private_alb"
   vpc_id      = module.vpc.vpc_id
-  tags = merge(var.tags{Name = "DevOps4DeFi-private-alb"})
+  tags = merge(var.tags,{Name = "DevOps4DeFi-private-alb"})
 
   ingress {
     from_port   = 0
