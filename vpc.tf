@@ -2,7 +2,7 @@ locals {
   private_cidr = cidrsubnet(var.vpc_cidr, 2 ,0)
   public_cidr = cidrsubnet(var.vpc_cidr, 2, 1)
   unused_cidr = cidrsubnet(var.vpc_cidr, 2 , 2)
-  cidr_bits_for_azs = ciel(log( var.az_count, 2))
+  cidr_bits_for_azs = ceil(log( var.az_count, 2))
 }
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
