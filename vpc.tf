@@ -7,7 +7,7 @@ locals {
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   version = "2.70.0"
-  name = "DeFi4DevOps VPC"
+  name = "DeFi4DevOps_VPC"
   cidr = var.vpc_cidr
 
   azs             = local.az_list

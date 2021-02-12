@@ -20,6 +20,7 @@ resource "aws_lb_listener" "public_https" {
   load_balancer_arn = aws_lb.public_alb.arn
   port = 443
   certificate_arn = aws_acm_certificate_validation.https.certificate_arn
+  protocol = "HTTPS"
   default_action {
     type = "fixed-response"
     fixed_response {
@@ -42,6 +43,7 @@ resource "aws_lb_listener" "private_http" {
     }
   }
 }
+
 ### Allows all ports into public ALB from internet for easy of integration.
 resource "aws_security_group" "public_alb_sg" {
   name_prefix = "DevOps4DeFi_public_alb"
@@ -50,7 +52,7 @@ resource "aws_security_group" "public_alb_sg" {
   ingress {
     from_port   = 0
     protocol    = "TCP"
-    to_port     = 0
+    to_port     = 65535
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
@@ -72,7 +74,7 @@ resource "aws_security_group" "private_alb_sg" {
   ingress {
     from_port   = 0
     protocol    = "TCP"
-    to_port     = 0
+    to_port     = 65535
     cidr_blocks = [local.private_cidr]
     description = "Own VPC"
   }
