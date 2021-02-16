@@ -44,8 +44,8 @@ output "root_domain_acm_arn" {
   value = data.terraform_remote_state.baseline.root_domain_acm_arn
   description = "An ACM cert for the root domain and *.rootdomain"
 }
-output "private_lb_http_listener_arn" {
-  value = data.terraform_remote_state.baseline.private_lb_http_listener_arn
+output "private_lb_https_listener_arn" {
+  value = data.terraform_remote_state.baseline.private_lb_https_listener_arn
   description = "A listener on the private alb that listens to http port 80"
 }
 

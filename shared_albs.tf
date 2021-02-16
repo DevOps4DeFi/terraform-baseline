@@ -31,9 +31,11 @@ resource "aws_lb_listener" "public_https" {
   }
 }
 
-resource "aws_lb_listener" "private_http" {
-  load_balancer_arn = aws_lb.public_alb.arn
-  port = 80
+resource "aws_lb_listener" "private_https" {
+  load_balancer_arn = aws_lb.private_alb.arn
+  port = 443
+  certificate_arn = aws_acm_certificate_validation.https.certificate_arn
+  protocol = "HTTPS"
   default_action {
     type = "fixed-response"
     fixed_response {

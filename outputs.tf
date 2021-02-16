@@ -40,16 +40,13 @@ output "azs" {
 output "region" {
   value = var.region
 }
-
 output "root_domain_acm_arn" {
   value = aws_acm_certificate_validation.https.certificate_arn
   description = "An ACM cert for the root domain and *.rootdomain"
 }
-
-output "private_lb_http_listener_arn" {
-  value = aws_lb_listener.private_http.arn
+output "private_lb_https_listener_arn" {
+  value = aws_lb_listener.private_https.arn
 }
-
 output "public_lb_https_listener_arn" {
   value = aws_lb_listener.public_https.arn
 }
